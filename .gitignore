@@ -1,0 +1,21 @@
+# Abhängigkeiten
+backend/node_modules/
+frontend/node_modules/
+
+# Builds / Artefakte
+frontend/build/
+
+# Umgebung / Logs
+.env
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Betrieb / Daten
+backend/putzplan.db
+
+# Sonstiges
+.DS_Store
+Thumbs.db
+

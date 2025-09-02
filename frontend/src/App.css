@@ -1,0 +1,458 @@
+body {
+  margin: 0;
+  font-family: 'Roboto', sans-serif; /* Modernere Schriftart */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #f0f2f5; /* Heller, angenehmer Hintergrund */
+  color: #333;
+}
+
+.App {
+  max-width: 1200px; /* Begrenze die maximale Breite */
+  margin: 40px auto; /* Zentriere die App */
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sanfter Schatten */
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+h1 {
+  color: #2c3e50; /* Dunklerer, prominenterer Titel */
+  margin-bottom: 30px;
+  font-size: 2.5em;
+  font-weight: 700;
+  text-align: center;
+}
+
+.putzplan-container {
+  overflow-x: auto;
+  margin: 0 auto;
+  max-width: 100%;
+  border-radius: 8px; /* Runde Ecken für die Tabelle */
+  overflow: hidden; /* Verstecke überlaufenden Inhalt für runde Ecken */
+}
+
+table {
+  width: 100%;
+  border-collapse: separate; /* Für abgerundete Ecken der Zellen */
+  border-spacing: 0; /* Kein Abstand zwischen Zellen */
+  margin-bottom: 20px;
+  background-color: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+table th,
+table td {
+  border: 1px solid #e0e0e0; /* Hellere, dezentere Ränder */
+  padding: 15px 10px; /* Mehr Polsterung */
+  padding-top: 25px; /* Zusätzlicher Platz oben für das Label */
+  text-align: center;
+  /* white-space: nowrap; */ /* Entfernt, um Textumbruch zu erlauben */
+}
+
+table thead th:first-child {
+  border-top-left-radius: 8px;
+}
+
+table thead th:last-child {
+  border-top-right-radius: 8px;
+}
+
+table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+table th {
+  background-color: #ecf0f1; /* Hellerer Hintergrund */
+  color: #555;
+  font-weight: 600; /* Etwas weniger fett */
+  position: relative;
+}
+
+table tbody tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.person-box {
+  display: inline-block;
+  padding: 8px 15px; /* Mehr Polsterung */
+  border-radius: 25px; /* Stärker abgerundet */
+  color: #333;
+  font-weight: 600; /* Etwas weniger fett */
+  min-width: 60px; /* Etwas schmaler für kleine Bildschirme */
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Leichter Schatten für Boxes */
+}
+
+.current-week-header {
+  background-color: #d1ecf1; /* Angenehmeres Blau */
+  border: 2px solid #00a8cc; /* Deutlicherer Rand */
+}
+
+.current-week-label {
+  position: absolute;
+  top: -10px; /* Etwas höher positioniert, aber mit mehr Platz */
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #00a8cc;
+  color: white;
+  padding: 5px 12px; /* Mehr Polsterung */
+  border-radius: 8px; /* Stärker abgerundet */
+  font-size: 0.75em; /* Etwas größer */
+  white-space: nowrap;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Schatten für Label */
+}
+
+.current-month-header {
+  /* Diese Klasse wird entfernt, da alle Monate grau hinterlegt sein sollen */
+}
+
+.main-nav {
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Etwas mehr Abstand */
+  flex-wrap: wrap; /* Erlaubt das Umbrechen von Buttons auf kleinen Bildschirmen */
+}
+
+.main-nav button {
+  padding: 12px 25px; /* Größere Buttons */
+  border: none;
+  background-color: #3498db; /* Einheitlicheres Blau */
+  color: white;
+  border-radius: 8px; /* Mehr abgerundet */
+  cursor: pointer;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Übergänge für Hover */
+}
+
+.main-nav button:hover {
+  background-color: #2980b9;
+  transform: translateY(-2px); /* Leichter Schwebe-Effekt */
+}
+
+.management-container {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  margin-top: 30px; /* Mehr Abstand zur Navigation */
+}
+
+.management-container h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+}
+
+.add-form {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.add-form input[type="text"],
+.add-form input[type="number"],
+.add-form input[type="color"] {
+  padding: 12px;
+  border: 1px solid #bdc3c7;
+  border-radius: 6px;
+  font-size: 1em;
+  flex-grow: 1; /* Inputs nehmen mehr Platz ein */
+  max-width: 250px;
+}
+
+.add-form button {
+  padding: 12px 20px;
+  background-color: #2ecc71; /* Grüner für Hinzufügen */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.add-form button:hover {
+  background-color: #27ae60;
+  transform: translateY(-2px);
+}
+
+.item-list {
+  list-style: none;
+  padding: 0;
+}
+
+.list-item {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.list-item:hover {
+  transform: translateY(-3px); /* Leichter Hover-Effekt */
+}
+
+.item-display span {
+  font-size: 1.2em;
+  font-weight: 600;
+  color: #34495e;
+}
+
+.actions button {
+  background-color: #f39c12; /* Orange für Bearbeiten */
+  color: white; /* Textfarbe auf weiß geändert */
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions button:hover {
+  background-color: #e67e22;
+  transform: translateY(-2px);
+}
+
+.actions button:last-child {
+  background-color: #e74c3c; /* Rot für Löschen */
+  color: white;
+}
+
+.actions button:last-child:hover {
+  background-color: #c0392b;
+  transform: translateY(-2px);
+}
+
+.edit-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.edit-form input {
+  flex-grow: 1;
+  padding: 10px;
+  border: 1px solid #bdc3c7;
+  border-radius: 6px;
+}
+
+.edit-form button {
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-left: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.edit-form button:hover {
+  transform: translateY(-2px);
+}
+
+.edit-form button:first-of-type {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.edit-form button:first-of-type:hover {
+  background-color: #2980b9;
+}
+
+.edit-form button:last-child {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+}
+
+.edit-form button:last-child:hover {
+  background-color: #7f8c8d;
+}
+
+/* Media Queries für Responsivität */
+@media (max-width: 768px) {
+  .App {
+    margin: 20px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .main-nav button {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+
+  table th,
+  table td {
+    padding: 10px 5px;
+    font-size: 0.9em;
+  }
+
+  .person-box {
+    min-width: 50px;
+    padding: 6px 10px;
+    font-size: 0.85em;
+  }
+}
+
+@media (max-width: 480px) {
+  .App {
+    margin: 10px;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.8em;
+  }
+
+  .main-nav {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .main-nav button {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.8em;
+  }
+
+  .putzplan-container {
+    overflow-x: auto; /* Stellt sicher, dass die Tabelle bei Bedarf scrollt */
+  }
+
+  .person-box {
+    min-width: unset; /* Ermöglicht, dass die Boxen kleiner werden */
+    width: 100%; /* Personennamen könnten in einer Zeile umbrechen */
+  }
+}
+
+/* Print specific styles */
+@media print {
+  body {
+    background-color: #fff; /* Weißer Hintergrund für den Druck */
+    margin: 0; /* Keine Ränder */
+    padding: 0; /* Keine Polsterung */
+  }
+
+  .App {
+    max-width: none; /* Keine maximale Breite */
+    margin: 0; /* Keine Ränder */
+    padding: 0; /* Keine Polsterung */
+    box-shadow: none; /* Kein Schatten */
+    border-radius: 0; /* Keine abgerundeten Ecken */
+  }
+
+  h1 {
+    font-size: 1.5em; /* Kleinere Überschrift für den Druck */
+    margin-top: 20px; /* Etwas Abstand oben */
+    margin-bottom: 20px;
+  }
+
+  .main-nav, .management-container, .add-form, .edit-form, .actions {
+    display: none; /* Elemente ausblenden, die nicht gedruckt werden sollen */
+  }
+
+  /* Zusätzliche Regel, um die Haupt-H1 auszublenden, wenn die Druckansicht aktiv ist (App-Komponente) */
+  .App > h1 {
+    display: none;
+  }
+
+  .print-container {
+    overflow-x: visible; /* Keine Scrollleisten im Druck */
+    max-width: 100%;
+    margin: 10mm; /* Druckränder */
+    padding: 0; /* Keine Polsterung hier, da es im body gesetzt wird */
+  }
+
+  table {
+    box-shadow: none; /* Kein Schatten für die Tabelle */
+    border: 1px solid #ccc; /* Einheitlicher Rand */
+  }
+
+  table th,
+  table td {
+    border: 1px solid #eee; /* Hellere Ränder für Zellen */
+    padding: 12px 8px; /* Mehr Polsterung */
+    font-size: 0.9em;
+    white-space: normal; /* Erlaubt das Umbrechen von Text in Zellen */
+    page-break-inside: avoid; /* Verhindert das Umbrechen von Zeilen über Seiten */
+  }
+
+  .person-box {
+    min-width: unset; /* Keine Mindestbreite */
+    padding: 6px 10px;
+    font-size: 0.8em; /* Leicht vergrößert */
+    color: #333 !important; /* Deutlicherer Text */
+    box-shadow: none; /* Kein Schatten */
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  .current-week-header, .current-month-header {
+    background-color: #f0f0f0 !important; /* Helle Hintergründe für den Druck */
+    border: 1px solid #ccc !important; /* Einheitlicher Rand */
+    -webkit-print-color-adjust: exact;
+    color-adjust: exact;
+  }
+
+  .current-week-label {
+    display: none; /* Label "Aktuelle Woche" im Druck ausblenden */
+  }
+}
