@@ -44,6 +44,15 @@ function PrintView() {
   return (
     <div className="print-container">
       <h1>Putzplan (Druckansicht)</h1>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <span>Online-Version:</span>
+          <a href="http://putzplan.wohnzimmer-hamburg.de" target="_blank" rel="noreferrer">
+            http://putzplan.wohnzimmer-hamburg.de
+          </a>
+        </div>
+        <img src="/qrcode.svg" alt="QR-Code zur Online-Version" style={{ width: '96px', height: '96px' }} />
+      </div>
       <table>
         <thead>
           <tr>
