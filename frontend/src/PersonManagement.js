@@ -4,6 +4,7 @@ function PersonManagement() {
   const [persons, setPersons] = useState([]);
   const [newPerson, setNewPerson] = useState({ id: '', name: '', color: '#000000', order: 0 });
   const [editingPerson, setEditingPerson] = useState(null);
+  const API_BASE = process.env.REACT_APP_API_BASE || (window.location.port === '3000' ? 'http://localhost:3001' : '');
 
   useEffect(() => {
     fetchPersons();
@@ -11,7 +12,7 @@ function PersonManagement() {
 
   const fetchPersons = async () => {
     try {
-      const response = await fetch('/api/persons');
+      const response = await fetch(`${API_BASE}/api/persons`);
       if (!response.ok) {
         throw new Error('Fehler beim Laden der Personen');
       }
@@ -25,7 +26,7 @@ function PersonManagement() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/persons', {
+      const response = await fetch(`${API_BASE}/api/persons`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +45,7 @@ function PersonManagement() {
 
   const handleUpdate = async (id) => {
     try {
-      const response = await fetch(`/api/persons/${id}`, {
+      const response = await fetch(`${API_BASE}/api/persons/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -64,7 +65,7 @@ function PersonManagement() {
   const handleDelete = async (id) => {
     if (window.confirm('Möchten Sie diese Person wirklich löschen?')) {
       try {
-        const response = await fetch(`/api/persons/${id}`, {
+        const response = await fetch(`${API_BASE}/api/persons/${id}`, {
           method: 'DELETE',
         });
         if (!response.ok) {

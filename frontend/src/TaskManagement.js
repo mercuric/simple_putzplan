@@ -7,6 +7,7 @@ function TaskManagement() {
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editTaskName, setEditTaskName] = useState('');
   const [editTaskFrequency, setEditTaskFrequency] = useState(1);
+  const API_BASE = process.env.REACT_APP_API_BASE || (window.location.port === '3000' ? 'http://localhost:3001' : '');
 
   useEffect(() => {
     fetchTasks();
@@ -14,7 +15,7 @@ function TaskManagement() {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch('/api/tasks');
+      const response = await fetch(`${API_BASE}/api/tasks`);
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
@@ -28,7 +29,7 @@ function TaskManagement() {
   const handleAddTask = async () => {
     if (!newTaskName || !newTaskFrequency) return;
     try {
-      const response = await fetch('/api/tasks', {
+      const response = await fetch(`${API_BASE}/api/tasks`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -59,7 +60,7 @@ function TaskManagement() {
   const handleUpdateTask = async (id) => {
     if (!editTaskName || !editTaskFrequency) return;
     try {
-      const response = await fetch(`/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE}/api/tasks/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -81,7 +82,7 @@ function TaskManagement() {
 
   const handleDeleteTask = async (id) => {
     try {
-      const response = await fetch(`/api/tasks/${id}`, {
+      const response = await fetch(`${API_BASE}/api/tasks/${id}`, {
         method: 'DELETE',
       });
       if (!response.ok) {

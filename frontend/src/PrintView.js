@@ -4,12 +4,13 @@ function PrintView() {
   const [putzplan, setPutzplan] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const API_BASE = process.env.REACT_APP_API_BASE || (window.location.port === '3000' ? 'http://localhost:3001' : '');
 
   useEffect(() => {
     const fetchPrintPutzplan = async () => {
       try {
         // Fordere 10 Wochen an (aktuelle + 9 zukünftige)
-        const response = await fetch('/api/putzplan?weeks=10');
+        const response = await fetch(`${API_BASE}/api/putzplan?weeks=10`);
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }

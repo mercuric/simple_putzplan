@@ -9,7 +9,7 @@ services:
     ports:
       - "3001:3001"
     volumes:
-      - /srv/putzplan/putzplan.db:/app/putzplan.db
+      - putzplan-data:/app/putzplan.db
     environment:
       - NODE_ENV=production
     restart: unless-stopped
