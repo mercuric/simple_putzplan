@@ -2,6 +2,24 @@
 
 Eine React-basierte Webanwendung zur Verwaltung von Putzplänen mit automatischer Aufgabenrotation.
 
+## Ziel und Funktionsweise
+
+Der Putzplan adressiert WGs und Hausprojekte und wird vollständig lokal betrieben – ohne Cloud und ohne Sammlung historischer Nutzungsdaten.
+
+- Personenverwaltung: Anlage von Personen mit Name, Farbe und Reihenfolge.
+- Aufgabenverwaltung: Anlage von Aufgaben mit Name und Häufigkeit in Wochen (z. B. 1 = wöchentlich, 2 = zweiwöchentlich, 4 = vierwöchentlich).
+- Automatische Wochenplanung: Für jede Kalenderwoche wird die Zuweisung deterministisch berechnet; es werden keine vergangenen Wochen gespeichert.
+
+Vorteile
+- Zustandslos (stateless): Der Plan kann jederzeit gestoppt/gestartet werden; es sind keine Migrationen oder Nachpflege historischer Daten nötig.
+- Faire Verteilung: Aufgaben rotieren gleichmäßig über alle Personen, so dass die wöchentliche Belastung möglichst ausgeglichen ist.
+- Langfristige Stabilität: Die Verteilung bleibt über Jahre konsistent, da sie stets neu und nachvollziehbar berechnet wird.
+
+Verteilungslogik (Rotation)
+- Aufgaben werden nach Häufigkeit absteigend sortiert (selten → häufig), um Kollisionen zu reduzieren und die Last gleichmäßig zu streuen.
+- Jede Aufgabe rotiert in Abhängigkeit ihrer Häufigkeit im Wochenraster zur nächsten Person (Round‑Robin bezogen auf die feste Personenreihenfolge).
+- Das System‑Startdatum wird auf einen Montag normalisiert, sodass Wochen einheitlich als Montag–Sonntag betrachtet werden.
+
 ## Features
 
 - Automatische Aufgabenrotation basierend auf Häufigkeit
@@ -74,4 +92,7 @@ Die SQLite-Datenbank wird automatisch erstellt und mit Standarddaten gefüllt. D
 
 - Empfohlen: Nur der Reverse Proxy (z. B. Nginx) veröffentlicht 80/443.
 - Subdomain → Reverse Proxy → `http://<host>:8085` (Frontend). `/api` wird vom Frontend-Nginx intern an das Backend proxyt.
+
+## Lizenz
+Dieses Projekt steht unter der MIT-Lizenz. Siehe `LICENSE`.
 
