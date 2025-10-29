@@ -1,6 +1,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs');
 const util = require('util'); // Für promisify
 const cors = require('cors'); // NEU: CORS für Cross-Origin-Anfragen
 
@@ -10,7 +11,16 @@ app.use(express.json()); // NEU: Für die Verarbeitung von JSON-Anfragen
 const port = 3001; // Ändern Sie den Port bei Bedarf
 
 // Datenbank-Initialisierung
-const dbPath = path.resolve(__dirname, 'putzplan.db');
+const configuredDbPath = process.env.DB_PATH || path.resolve(__dirname, 'putzplan.db');
+const dbDir = path.dirname(configuredDbPath);
+try {
+  if (!fs.existsSync(dbDir)) {
+    fs.mkdirSync(dbDir, { recursive: true });
+  }
+} catch (e) {
+  console.error('Fehler beim Erstellen des DB-Verzeichnisses:', e.message);
+}
+const dbPath = configuredDbPath;
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error('Fehler beim Öffnen der Datenbank:', err.message);
