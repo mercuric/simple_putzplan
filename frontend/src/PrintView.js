@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { QRCodeSVG } from 'react-qr-code';
+import QRCode from 'qrcode';
 
 function PrintView() {
   const [putzplan, setPutzplan] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [qrCodeDataUrl, setQrCodeDataUrl] = useState('');
   const API_BASE = process.env.REACT_APP_API_BASE || (window.location.port === '3000' ? 'http://localhost:3001' : '');
 
   useEffect(() => {
@@ -41,7 +42,19 @@ function PrintView() {
 
   // Extrahiere Aufgabenamen von der ersten Woche, um Spalten zu generieren
   const taskNames = (Object.values(putzplan)[0]?.assignments || []).map(a => a.taskName);
-  const siteUrl = window.location.origin;
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : '';
+
+  // QR-Code generieren (nur im Browser, nicht beim Build)
+  useEffect(() => {
+    if (typeof window !== 'undefined' && siteUrl) {
+      QRCode.toDataURL(siteUrl, { width: 96, margin: 0 })
+        .then(url => setQrCodeDataUrl(url))
+        .catch(err => {
+          console.error('QR Code generation error:', err);
+          // Fallback: QR-Code bleibt leer, Link bleibt verfügbar
+        });
+    }
+  }, [siteUrl]);
 
   return (
     <div className="print-container">
@@ -88,7 +101,7 @@ function PrintView() {
             {siteUrl}
           </a>
         </div>
-        <QRCodeSVG value={siteUrl} size={96} />
+        {qrCodeDataUrl && <img src={qrCodeDataUrl} alt="QR-Code zur Online-Version" style={{ width: '96px', height: '96px' }} />}
       </div>
     </div>
   );
