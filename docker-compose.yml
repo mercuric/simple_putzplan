@@ -6,8 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     container_name: putzplan-backend
-    ports:
-      - "3001:3001"
+    # Kein Host-Port-Mapping im Prod-Betrieb
     volumes:
       - putzplan-data:/app/data
     environment:
