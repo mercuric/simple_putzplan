@@ -21,7 +21,8 @@ try {
   console.error('Fehler beim Erstellen des DB-Verzeichnisses:', e.message);
 }
 const dbPath = configuredDbPath;
-const db = new sqlite3.Database(dbPath, (err) => {
+console.log('SQLite DB Pfad:', dbPath);
+const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
   if (err) {
     console.error('Fehler beim Öffnen der Datenbank:', err.message);
   } else {
