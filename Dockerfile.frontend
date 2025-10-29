@@ -4,7 +4,8 @@ WORKDIR /app
 
 # Kopiere package.json und installiere Dependencies
 COPY frontend/package*.json ./
-RUN npm ci
+# Verwende npm install statt npm ci, um Lockfile-Mismatches beim Build zu vermeiden
+RUN npm install --no-audit --no-fund
 
 # Kopiere Frontend-Code
 COPY frontend/ ./
