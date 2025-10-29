@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { QRCodeCanvas } from 'qrcode.react';
 
 function PrintView() {
   const [putzplan, setPutzplan] = useState({});
@@ -40,19 +41,11 @@ function PrintView() {
 
   // Extrahiere Aufgabenamen von der ersten Woche, um Spalten zu generieren
   const taskNames = (Object.values(putzplan)[0]?.assignments || []).map(a => a.taskName);
+  const siteUrl = window.location.origin;
 
   return (
     <div className="print-container">
       <h1>Putzplan (Druckansicht)</h1>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '16px' }}>
-        <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span>Online-Version:</span>
-          <a href="http://putzplan.wohnzimmer-hamburg.de" target="_blank" rel="noreferrer">
-            http://putzplan.wohnzimmer-hamburg.de
-          </a>
-        </div>
-        <img src="/qrcode.svg" alt="QR-Code zur Online-Version" style={{ width: '96px', height: '96px' }} />
-      </div>
       <table>
         <thead>
           <tr>
@@ -88,6 +81,15 @@ function PrintView() {
           ))}
         </tbody>
       </table>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginTop: '16px' }}>
+        <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <span>Online-Version:</span>
+          <a href={siteUrl} target="_blank" rel="noreferrer">
+            {siteUrl}
+          </a>
+        </div>
+        <QRCodeCanvas value={siteUrl} size={96} includeMargin={false} />
+      </div>
     </div>
   );
 }
