@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { QRCodeCanvas } from 'qrcode.react';
+import { QRCodeSVG } from 'react-qr-code';
 
 function PrintView() {
   const [putzplan, setPutzplan] = useState({});
@@ -88,7 +88,7 @@ function PrintView() {
             {siteUrl}
           </a>
         </div>
-        <QRCodeCanvas value={siteUrl} size={96} includeMargin={false} />
+        <QRCodeSVG value={siteUrl} size={96} />
       </div>
     </div>
   );
