@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Putzplan",
+  "name": "Putzplan - Aufgabenrotation für WGs",
   "icons": [
     {
       "src": "favicon.ico",

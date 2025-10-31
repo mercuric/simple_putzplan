@@ -87,7 +87,6 @@ function PrintView() {
             {siteUrl}
           </a>
         </div>
-        <span style={{ fontSize: '12px', color: '#666' }}>QR-Code: {siteUrl}</span>
       </div>
     </div>
   );
